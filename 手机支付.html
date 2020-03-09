@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			li{list-style: none;}
+			.box{width: 300px;height: 500px;background: #454D55;border: 1px solid #000000;margin: 10px auto;overflow: hidden;position: relative;z-index: 1;}
+			
+			.da{width: 300px;height: 470px;position: absolute;z-index: 2;}
+			.one{width: 100px;height: 25px;border: 1px solid #C82333;margin: 0 auto;margin-top: 30px;background: #fff;text-align: center;line-height: 25px;}
+			.two{width: 100px;height: 25px;border: 1px solid #C82333;margin: 0 auto;margin-top: 30px;background: #fff;text-align: center;line-height: 25px;}
+			.three{width: 100px;height: 25px;border: 1px solid #C82333;margin: 0 auto;margin-top: 30px;background: #fff;text-align: center;line-height: 25px;}
+			
+			.mi{width: 300px;height: 300px;position: absolute;top:500px;z-index: 3;background-color: #fff;}
+			.shang{width: 300px;height: 120px;}
+			.cha1{width: 25px;height: 25px;background: url(img/x.png)no-repeat center/100% 100%;/* float:right; */margin-left: 270px;}
+			.cha2{width: 300px;height: 25px;text-align: center;line-height: 25px;margin-top: 10px;font-size: 14px;}
+			.cha2>.yuan{color: #C7000B;}
+			.cha3{width: 241px;height: 35px;margin: 0 auto;margin-top: 10px;}
+			.shu{width: 241px;height: 35px;border: 1px solid #DDDDDD;border-right: 0;}
+			.shu>li{width: 39px;height: 100%;float:left;border-right: 1px solid #DDDDDD;}
+			.shu>li>.m{width: 30px;height: 30px;margin: 2px auto;display: none;}
+		    .shu>li>.m>img{width: 30px;height: 30px;} 
+			.xia{width: 300px;height: 145px;}
+			.zi{width: 300px;height: 100%;border-top: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;}
+			.zi>li{width: 98px;height: 35px;float:left;text-align: center;line-height: 45px;border-right: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;}
+			
+			
+			.f10{background-color: #777777;}
+		    .f10>.qingkou{width: 20px;height: 20px;}
+			.f12{background-color: #777777;}
+			.f12>.shanchu{width: 20px;height: 20px;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="da">
+				<div class="one">打开弹框</div>
+				<div class="two">关闭弹框</div>
+				<div class="three">清空密码</div>
+			</div>
+			<div class="mi">
+				<div class="shang">
+					<div class="cha1"></div>
+					<div class="cha2">你将支付<span class="yuan">250</span>元,请输入支付密码</div>
+					<div class="cha3">
+						<ul class="shu">
+							<li><div class="m"><img src="./img/m.png" alt=""></div></li>
+							<li><div class="m"><img src="./img/m.png" alt=""></div></li>
+							<li><div class="m"><img src="./img/m.png" alt=""></div></li>
+							<li><div class="m"><img src="./img/m.png" alt=""></div></li>
+							<li><div class="m"><img src="./img/m.png" alt=""></div></li>
+							<li><div class="m"><img src="./img/m.png" alt=""></div></li>
+						</ul>
+					</div>
+				</div>
+				<div class="xia">
+					<ul class="zi">
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>6</li>
+						<li>7</li>
+						<li>8</li>
+						<li>9</li>
+						<li class="f10"><img src="./img/清除.png" alt="" class="qingkou"></li>
+						<li>0</li>
+						<li class="f12"><img src="./img/x.png" alt="" class="shanchu"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<script src="./jquery.js"></script>
+		<script>
+			$(function(){
+				$('.one').on('click',function(){
+					// console.log(11)
+					$('.mi').animate({top:200+'px'},300)
+					count = -1
+					$('.shu>li').find('div').css('display', 'none')
+				})
+				$('.two').on('click',function(){
+					// console.log(11)
+					$('.mi').animate({top:500+'px'},300)
+					count = -1
+					$('.shu>li').find('div').css('display', 'none')
+				})
+				$('.cha1').on('click',function(){
+					// console.log(11)
+					$('.mi').animate({top:500+'px'},300)
+					count = -1
+					$('.shu>li').find('div').css('display', 'none')
+				})
+				
+				
+				var arr=[]
+				var count=-1
+				var res=false
+				var re=true
+				$('.zi>li').on('click',function(){
+					var num=$(this).index()+1
+					console.log(num)
+					count++
+					if(count <=5){
+						if(num <=9){
+							$('.shu>li').eq(count).find('div').css('display','block')
+						}
+						if(num==11){
+							$('.shu>li').eq(count).find('div').css('display','block')
+						}
+					}
+					if(count>=6){
+						count = -1
+						$('.shu>li').find('div').css('display', 'none')
+						
+						$('.mi').animate({top:500+'px'},300)
+						alert('支付完成')
+					}
+					
+					re = true
+					if (num == 12) {
+						$('.shu>li').eq(count - 1).find('div').css('display', 'none')
+						count = count - 2
+					}
+					if (num == 10) {
+						re = false
+						count = -1
+						arr = []
+						$('.shu>li').find('div').css('display', 'none')
+					}
+				})
+				
+				$('.three').on('click',function(){
+					count = -1
+					$('.shu>li').find('div').css('display', 'none')
+				})
+				
+				
+			})
+		</script>
+	</body>
+</html>
